@@ -42,7 +42,7 @@ class Cron extends CMSModule
 
 	function GetName()					{		return 'Cron';							}
 	function GetFriendlyName()			{		return $this->Lang('friendlyname');		}
-	function GetVersion()				{		return '0.0.7';							}	
+	function GetVersion()				{		return '0.0.8';							}
 	function GetHelp()					{		return $this->Lang('help');				}
 	function GetAuthor()				{		return 'Jean-Christophe Cuvelier';		}
 	function GetAuthorEmail()			{		return 'jcc@atomseeds.com';		}
