@@ -6,11 +6,15 @@
 # More info at http://dev.cmsmadesimple.org/projects/cron
 #----------------------------------------------------------------------
 
-switch($$oldversion)
+switch($newversion)
 {
+	case '0.1'
+		$this->CreatePermission ('ReviewCronStatus', $this->Lang ('perm_review'));
+		$this->CreatePermission ('SendCronEvents', $this->Lang ('perm_send'));
+		$fn = cms_join_path (dirname (__FILE__), 'action.default.php');
+		if (is_file ($fn))
+			unlink ($fn);
+		break;
 }
-
-// put mention into the admin log
-$this->Audit(0, $this->Lang('friendlyname'), $this->Lang('upgraded',$this->GetVersion()));
 
 ?>
