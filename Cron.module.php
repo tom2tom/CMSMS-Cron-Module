@@ -20,16 +20,25 @@
 
 class Cron extends CMSModule
 {
-	function GetName()					{	return 'Cron';							}
-	function GetFriendlyName()			{	return $this->Lang('friendlyname');		}
-	function GetVersion()				{	return '0.1';							}
-	function GetHelp()					{	return $this->Lang('help_module');		}
-	function GetAuthor()				{	return 'Jean-Christophe Cuvelier';		}
-	function GetAuthorEmail()			{	return 'jcc@atomseeds.com';				}
-	function IsPluginModule()			{	return true;							}
-	function HasAdmin()					{	return true;							}
-	function GetAdminSection()			{	return 'siteadmin';						}	
-	function GetAdminDescription()		{	return $this->Lang('admindescription');	}
+	function GetAdminDescription()	{ return $this->Lang ('admindescription'); }
+	function GetAdminSection()		{ return 'siteadmin'; }
+	function GetAuthor()			{ return 'Jean-Christophe Cuvelier'; }
+	function GetAuthorEmail()		{ return 'jcc@atomseeds.com'; }
+	function GetDependencies()		{ return array (); }
+	function GetFriendlyName()		{ return $this->Lang ('friendlyname'); }
+	function GetHelp()				{ return $this->Lang ('help_module'); }
+	function GetName()				{ return 'Cron'; }
+	function GetVersion()			{ return '0.1'; }
+	function HasAdmin()				{ return true; }
+	function InstallPostMessage()	{ return $this->Lang ('postinstall'); }
+	function IsPluginModule()		{ return true; }
+	function MinimumCMSVersion()	{ return '1.8'; }
+	function UninstallPostMessage()	{ return $this->Lang ('postuninstall'); }
+	function UninstallPreMessage()	{ return $this->Lang ('really_uninstall'); }
+	//for 1.11+
+	function AllowSmartyCaching()	{ return true; }
+	function LazyLoadAdmin()		{ return false; }
+	function LazyLoadFrontend() 	{ return true; }
 
 	function GetChangeLog()
 	{
@@ -38,98 +47,54 @@ class Cron extends CMSModule
 
 	function DisplayErrorPage($id, &$params, $return_id, $message='')
 	{
-		$smarty->assign('title_error', $this->Lang('error'));
-		$smarty->assign('message', $message);
-		echo $this->ProcessTemplate('error.tpl');
-	}
-
-	function GetDependencies()
-	{
-		return array();
-	}
-
-	function MinimumCMSVersion()
-	{
-		return '1.8';
-	}
-
-	function InstallPostMessage()
-	{
-		return $this->Lang('postinstall');
-	}
-
-	function UninstallPostMessage()
-	{
-		return $this->Lang('postuninstall');
-	}
-
-	function UninstallPreMessage()
-	{
-		return $this->Lang('really_uninstall');
-	}
-
-	//for 1.11+
-	function AllowSmartyCaching()
-	{
-		return true;
+		$smarty->assign ('title_error', $this->Lang('error'));
+		$smarty->assign ('message', $message);
+		echo $this->ProcessTemplate ('error.tpl');
 	}
 
 	function VisibleToAdminUser()
 	{
 		return
-		 $this->CheckPermission('ReviewCronStatus') ||
-		 $this->CheckPermission('SendCronEvents');
-	}
-
-	function LazyLoadAdmin()
-	{
-		return false;
-	}
-
-	function LazyLoadFrontend()
-	{
-		return false;
+		 $this->CheckPermission ('ReviewCronStatus') ||
+		 $this->CheckPermission ('SendCronEvents');
 	}
 
 	function SetParameters()
 	{
-		$this->InitializeAdmin();
-		$this->InitializeFrontend(); 
+		$this->InitializeAdmin ();
+		$this->InitializeFrontend (); 
 	}
 
 	function InitializeAdmin()
 	{
-		$this->CreateParameter('showtemplate',0,$this->Lang('help_showtemplate'));
 	}
 
 	function InitializeFrontend()
 	{
-		$this->RegisterModulePlugin();
-		$this->RestrictUnknownParams();
-		$this->SetParameterType('showtemplate',CLEAN_INT);
-		$this->RegisterRoute('/cron\/(?P<maction>[a-zA-Z0-9_-]+)(\/.*?)?$/',
-		array(
-		 'action' => 'default', 
-		 'showtemplate' => 0,
-		 'returnid' => cmsms()->GetContentOperations()->GetDefaultPageID()
-		));
+		$this->RegisterModulePlugin ();
+		$this->RestrictUnknownParams ();
+		$this->SetParameterType ('sendmode', CLEAN_STRING); //internal use only
+
+		$this->RegisterRoute ('/cron\/send$/', array('action' => 'send'));
+		$this->RegisterRoute ('/cron\/send\/(?P<sendmode>[\w]{2,10})$/',
+			array('action' => 'send'));
 	}
 
 	public function GetEventDescription($eventname)
 	{
-		if(strncmp($eventname,'Cron',4) === 0)
+		if(strncmp ($eventname,'Cron',4) === 0)
 		{
-			$key = 'event_'.substr($eventname,4).'_desc';
-			return $this->Lang($key);
+			$key = 'event_'.substr ($eventname,4).'_desc';
+			return $this->Lang ($key);
 		}
+		return '';
 	}
 
 	public function GetEventHelp($eventname) 
 	{
-		if(strncmp($eventname,'Cron',4) === 0)
-		{
-			return $this->Lang('timeparameter');
-		}
+		if(strncmp ($eventname,'Cron',4) === 0)
+			return $this->Lang ('timeparameter');
+		return '';
 	}
 
 }
