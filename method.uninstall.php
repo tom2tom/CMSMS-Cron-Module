@@ -15,7 +15,5 @@ foreach ($periods as $period => $time)
 // and permissions
 $this->RemovePermission('ReviewCronStatus');
 $this->RemovePermission('SendCronEvents');
-// put mention into the admin log
-$this->Audit(0, $this->Lang('friendlyname'), $this->Lang('uninstalled'));
 
 ?>

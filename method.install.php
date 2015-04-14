@@ -15,8 +15,5 @@ foreach ($periods as $period => $time)
 
 $this->CreatePermission('ReviewCronStatus',$this->Lang('perm_review'));
 $this->CreatePermission('SendCronEvents',$this->Lang('perm_send'));
-
-// put mention into the admin log
-$this->Audit(0, $this->Lang('friendlyname'), $this->Lang('installed',$this->GetVersion()));
-		
+	
 ?>
