@@ -30,7 +30,6 @@ class Cron extends CMSModule
 	function HasAdmin()					{	return true;							}
 	function GetAdminSection()			{	return 'siteadmin';						}	
 	function GetAdminDescription()		{	return $this->Lang('admindescription');	}
-	function VisibleToAdminUser()		{	return true;							}
 
 	function GetChangeLog()
 	{
@@ -51,7 +50,7 @@ class Cron extends CMSModule
 
 	function MinimumCMSVersion()
 	{
-		return "1.8";
+		return '1.8';
 	}
 
 	function InstallPostMessage()
@@ -73,6 +72,13 @@ class Cron extends CMSModule
 	function AllowSmartyCaching()
 	{
 		return true;
+	}
+
+	function VisibleToAdminUser()
+	{
+		return
+		 $this->CheckPermission('ReviewCronStatus') ||
+		 $this->CheckPermission('SendCronEvents');
 	}
 
 	function LazyLoadAdmin()
@@ -122,23 +128,10 @@ class Cron extends CMSModule
 	{
 		if(strncmp($eventname,'Cron',4) === 0)
 		{
-//			$key = 'event_'.substr($eventname,4).'_help';
-//			return $this->Lang($key);
-			return $this->Lang('noparameters');
+			return $this->Lang('timeparameter');
 		}
 	}
 
-	function getPeriods()
-	{
-		return array(
-		 '15min' => '-15 minutes',
-		 'Hourly' => '-1 hour',
-		 'Daily' => '-1 day', 
-		 'Weekly' => '-1 week', 
-		 'Monthly' => '-1 month', 
-		 'Yearly' => '-1 year'
-		);
-	}
 }
 
 ?>
