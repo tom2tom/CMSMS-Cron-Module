@@ -6,15 +6,13 @@
 # More info at http://dev.cmsmadesimple.org/projects/cron
 #----------------------------------------------------------------------
 
-switch($newversion)
+switch($oldversion)
 {
-	case '0.1'
+	case '0.0.5':
+		$this->CreateEvent ('Cron15min');
+	case '0.0.8':
 		$this->CreatePermission ('ReviewCronStatus', $this->Lang ('perm_review'));
 		$this->CreatePermission ('SendCronEvents', $this->Lang ('perm_send'));
-		$fn = cms_join_path (dirname (__FILE__), 'action.default.php');
-		if (is_file ($fn))
-			unlink ($fn);
-		break;
 }
 
 ?>
