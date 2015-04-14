@@ -6,11 +6,14 @@
 # More info at http://dev.cmsmadesimple.org/projects/cron
 #----------------------------------------------------------------------
 
-global $gCms;
-if (!isset ($gCms)) exit;
+if (!cron_utils::isme()) exit;
 
-if (!$this->VisibleToAdminUser())
+if (!$this->VisibleToAdminUser ())
 	return $this->DisplayErrorPage($id, $params, $returnid, $this->Lang('accessdenied'));
+
+$psend = $this->CheckPermission ('SendCronEvents');
+if ($psend && isset ($params['sendnow']))
+	cron_utils::sendEvents ($this);
 
 $global_periods = cron_utils::getPeriods();
 $periods = array();
@@ -27,11 +30,11 @@ $smarty->assign('periods', $periods);
 $smarty->assign('title_period', $this->Lang('period'));
 $smarty->assign('title_used', $this->Lang('last_used'));
 
-if ($this->CheckPermission ('SendCronEvents'))
+if ($psend)
 {
-	$sf = $this->CreateFormStart ($id, 'default', $returnid);
+	$sf = $this->CreateFormStart ($id, 'defaultadmin', $returnid);
 	$ef = $this->CreateFormEnd ();
-	$btn = $this->CreateInputSubmit ($id, 'manual', $this->Lang ('run_cron'),
+	$btn = $this->CreateInputSubmit ($id, 'sendnow', $this->Lang ('run_cron'),
 		'title = "'.$this->Lang ('run_tip').'" onclick="return confirm(\''.
 		$this->Lang ('areyousure').'\');"');
 }
