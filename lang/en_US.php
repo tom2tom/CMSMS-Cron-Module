@@ -9,7 +9,7 @@ $lang['installed'] = 'Module version %s installed.';
 $lang['upgraded'] = 'Module upgraded to version %s.';
 $lang['moddescription'] = 'This module allows execution of cron jobs for modules.';
 
-$lang['run_cron'] = 'Run cron';
+$lang['run_cron'] = 'Send';
 $lang['run_tip'] = 'send all pending Cron* events to registered handlers';
 $lang['cron_executed'] = '%s cron successfully executed';
 $lang['cron_launched'] = 'Cron task launched';
