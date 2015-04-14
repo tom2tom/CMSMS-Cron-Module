@@ -1,40 +1,32 @@
 <?php
+
 if (!isset($gCms)) exit;
 
-if (! $this->CheckAccess())
-	{
-	return $this->DisplayErrorPage($id, $params, $returnid,$this->Lang('accessdenied'));
-	}
-
-/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-   Code for Cron "defaultadmin" admin action
-   
-   -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-   
-   Typically, this will display something from a template
-   or do some other task.
-   
-*/
-
+if (!$this->CheckPermission(''))
+	return $this->DisplayErrorPage($id, $params, $returnid, $this->Lang('accessdenied'));
 
 $global_periods = $this->getPeriods();
 $periods = array();
-$rowclass = 'row1';
-foreach ($global_periods as $period => $time)
+foreach ($global_periods as $period => $val)
 {
-	$periods[$period]->name = $period;
-	$periods[$period]->last = date('d/m/Y H:i:s', intval($this->GetPreference('Last' . $period)));
-	$periods[$period]->rowclass = $rowclass;
-  ($rowclass=="row1"?$rowclass="row2":$rowclass="row1");
+	$obj = new StdClass();
+	$obj->name = $this->Lang($period);
+	$when = (int)$this->GetPreference('Last'.$period);
+	$obj->last = ($when > 0) ? date('Y-m-d H:i:s', $when) : $this->Lang('unused');
+	$periods[] = $obj;
 }
 
-$this->smarty->assign('periods', $periods);
-$this->smarty->assign('period', $this->lang('period'));
-$this->smarty->assign('last_execution', $this->lang('last_execution'));
+$smarty->assign('periods', $periods);
+$smarty->assign('title_period', $this->Lang('period'));
+$smarty->assign('title_used', $this->Lang('last_used'));
 
-
-echo '<div><p>' . $this->CreateLink($id, 'default', $returnid, 'Run cron', array(), $this->Lang('areyousure'),false,false,'',false,'cron/' . $id) . '</p></div>';
+$smarty->assign('startform',$this->CreateFormStart($id,'default',$returnid));
+$smarty->assign('endform',$this->CreateFormEnd());
+$smarty->assign('runcron',
+	$this->CreateInputSubmit($id,'run',$this->Lang('run_cron'),
+	'title = "'.$this->Lang('run_tip').'" onclick="return confirm(\''.
+	$this->Lang('areyousure').'\');"'));
 
 echo $this->ProcessTemplate('adminpanel.tpl');
 
+?>
