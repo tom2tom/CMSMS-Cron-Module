@@ -15,12 +15,15 @@ $lang['cron_executed'] = '%s cron successfully executed';
 $lang['cron_launched'] = 'Cron task launched';
 
 $lang['error'] = 'Error!';
-$lang['admindescription'] = 'This module provides a convenient interface for other modules to get notifications from the webserver cron mechanism.';
+$lang['admindescription'] = 'This module provides a convenient way for other modules to get periodic notifications, of several kinds.';
 $lang['accessdenied'] = 'Access denied. Please check your permissions.';
-$lang['postinstall'] = 'Cron module successfully installed. Read the module help to see what to do next.';
+$lang['postinstall'] = 'Cron module successfully installed. After setting relevant permissions, read the module help to see what to do next.';
+
+$lang['perm_review'] = 'Review status of sent Cron events';
+$lang['perm_send'] = 'Manually send Cron events';
 
 $lang['period'] = 'Period';
-$lang['last_used'] = 'Last execution (Y-m-d)';
+$lang['last_used'] = 'Last sent on (Y-m-d)';
 $lang['areyousure'] = 'Are you sure ?';
 
 $lang['15min'] = 'Quarter-hourly';
@@ -30,12 +33,20 @@ $lang['Weekly'] = 'Weekly';
 $lang['Monthly'] = 'Monthly';
 $lang['Yearly'] = 'Yearly';
 
-$lang['event_15min_desc'] = 'Sent when ... TODO';
-$lang['event_Hourly_desc'] = 'Sent when ... TODO';
-$lang['event_Daily_desc'] = 'Sent when ... TODO';
-$lang['event_Weekly_desc'] = 'Sent when ... TODO';
-$lang['event_Monthly_desc'] = 'Sent when ... TODO';
-$lang['event_Yearly_desc'] = 'Sent when ... TODO'; 
+$lang['send_frequency'] = 'Sent at intervals of approximately %s';
+$lang['period_qtrhr'] = '15 minutes';
+$lang['period_hour'] = 'an hour';
+$lang['period_day'] = 'a day';
+$lang['period_week'] = 'a week';
+$lang['period_month'] = 'a month';
+$lang['period_year'] = 'a year';
+
+$lang['event_15min_desc'] = sprintf($lang['send_frequency'],$lang['period_qtrhr']);
+$lang['event_Hourly_desc'] = sprintf($lang['send_frequency'],$lang['period_hour']); 
+$lang['event_Daily_desc'] = sprintf($lang['send_frequency'],$lang['period_day']);
+$lang['event_Weekly_desc'] = sprintf($lang['send_frequency'],$lang['period_week']);
+$lang['event_Monthly_desc'] = sprintf($lang['send_frequency'],$lang['period_month']);
+$lang['event_Yearly_desc'] = sprintf($lang['send_frequency'],$lang['period_year']);
 /*
 $lang['event_15min_help'] = '';
 $lang['event_Hourly_help'] = '';
@@ -44,25 +55,28 @@ $lang['event_Weekly_help'] = '';
 $lang['event_Monthly_help'] = '';
 $lang['event_Yearly_help'] = ''; 
 */
-$lang['noparameters'] = 'No arguments';
-$lang['unused'] = 'Never used';
+//$lang['noparameter'] = 'No event parameters';
+$lang['timeparameter'] = 'This event supplies one parameter: a timestamp representing the date/time sent';
+$lang['unused'] = 'Never';
 
 $lang['help_module'] = <<<EOS
 <h3>What Does It Do?</h3>
-<p>This module provides a convenient interface for other modules to get notifications from the webserver cron mechanism.</p>
+<p>This module provides a convenient way for other modules to get periodic notifications, of several kinds.</p>
 <h3>How Do I Use It?</h3>
-<h4>Arrange for webserver to notify this module</h4>
-<p>If pretty URL's are enabled, configure the webserver crontab to call the page 'cron/run' e.g.</p>
-<pre>[/path/to/]curl http://www.example.com/cron/run</pre>
+<h4>Arrange for webserver to trigger the notifications</h4>
+<p>If pretty URL's are enabled, configure the webserver crontab to call the page 'cron/run'
+at 15-minute intervals e.g. on a linux server</p>
+<pre>*/15 * * * * [/path/to/]curl http://www.example.com/cron/run</pre>
 <p>Otherwise, create a website page (presumably hidden) called 'cron' with a <pre>{Cron}</pre> tag on that page.
-Then configure the webserver crontab to call that page e.g.</p>
-<pre>[/path/to/]curl http://www.example.com/index.php?page=cron</pre>
-<p><a href="http://www.thesitewizard.com/general/set-cron-job.shtml">This</a>
+Then configure the webserver crontab to call that page at 15-minute intervals e.g.</p>
+<pre>*/15 * * * * [/path/to/]curl http://www.example.com/index.php?page=cron</pre>
+<p><a href="http://www.thesitewizard.com/general/set-cron-job.shtml" target="_new">This</a>
 and
-<a href="https://documentation.cpanel.net/display/ALD/Cron+Jobs">this</a>
+<a href="https://documentation.cpanel.net/display/ALD/Cron+Jobs" target="_new">this</a>
 and
-<a href="http://code.tutsplus.com/tutorials/managing-cron-jobs-with-php-2--net-19428">this</a>
-(among others) might be helpful for webserver configuration.</p>
+<a href="http://code.tutsplus.com/tutorials/managing-cron-jobs-with-php-2--net-19428" target="_new">this</a>
+(among others) might be helpful for webserver configuration.<br /><br />
+Or on a Microsoft server, 'Scheduled Tasks' must be set up, instead of cron.</p>
 <h4>Arrange for other module(s) to receive events from this module</h4>
 <p>The <a href="http://docs.cmsmadesimple.org/quick-guide/using-cmsms-events" target="_new">CMSMS documentation</a> provides an overview.
 In brief, include installation code like:</p>
@@ -95,7 +109,7 @@ public function DoEvent(\$originator, \$eventname, &amp;\$params)
 <p>For help:</p>
 <ul>
 <li>discussion may be found in the <a href="http://forum.cmsmadesimple.org">CMS Made Simple Forums</a>; or</li>
-<li>you may have some success emailing the author directly.</li>
+<li>you might have some success emailing the author directly.</li>
 </ul>
 <p>For the latest version of the module, or to report a bug, visit the module's <a href="http://dev.cmsmadesimple.org/projects/cron">forge-page</a>.</p>
 <h3>Copyright and License</h3>
