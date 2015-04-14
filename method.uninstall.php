@@ -11,9 +11,9 @@ $this->RemovePreference();
 // and events
 $periods = cron_utils::getPeriods();
 foreach ($periods as $period => $time)
-	$this->RemoveEvent('Cron'.$period);
+	$this->RemoveEvent ('Cron'.$period);
 // and permissions
-$this->RemovePermission('ReviewCronStatus');
-$this->RemovePermission('SendCronEvents');
+$this->RemovePermission ('ReviewCronStatus');
+$this->RemovePermission ('SendCronEvents');
 
 ?>
