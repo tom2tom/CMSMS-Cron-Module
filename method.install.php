@@ -1,5 +1,4 @@
 <?php
-if (!isset($gCms)) exit;
 		
 $periods = $this->getPeriods();
 foreach ($periods as $period => $time)
