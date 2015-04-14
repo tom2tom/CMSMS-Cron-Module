@@ -61,19 +61,20 @@ $lang['help_module'] = <<<EOS
 <p>This module provides a convenient way for other modules to get periodic notifications, of several kinds.</p>
 <h3>How Do I Use It?</h3>
 <h4>Arrange for webserver to trigger the notifications</h4>
-<p>If pretty URL's are enabled, configure the webserver crontab to call the page 'cron/run'
-at 15-minute intervals e.g. on a linux server</p>
+<p>Configure the webserver to call, at 15-minute intervals:</p>
+<ul>
+<li>if pretty URL's are enabled - [SITEURL]/cron/send</li>
+<li>otherwise - [SITEURL]/index.php?page=cronsend (where 'cronsend' is the alias of a site page (presumably hidden) that has a <pre>{Cron}</pre> tag on it)</li>
+</ul>
+e.g. cron on a linux server
 <pre>*/15 * * * * [/path/to/]curl http://www.example.com/cron/run</pre>
-<p>Otherwise, create a website page (presumably hidden) called 'cron' with a <pre>{Cron}</pre> tag on that page.
-Then configure the webserver crontab to call that page at 15-minute intervals e.g.</p>
-<pre>*/15 * * * * [/path/to/]curl http://www.example.com/index.php?page=cron</pre>
-<p><a href="http://www.thesitewizard.com/general/set-cron-job.shtml" target="_new">This</a>
+or on a Microsoft server, 'Scheduled Tasks' must be set up instead of cron.<br /><br />
+<a href="http://www.thesitewizard.com/general/set-cron-job.shtml" target="_new">This</a>
 and
 <a href="https://documentation.cpanel.net/display/ALD/Cron+Jobs" target="_new">this</a>
 and
 <a href="http://code.tutsplus.com/tutorials/managing-cron-jobs-with-php-2--net-19428" target="_new">this</a>
-(among others) might be helpful for webserver configuration.<br /><br />
-Or on a Microsoft server, 'Scheduled Tasks' must be set up, instead of cron.</p>
+(among others) might be helpful for webserver configuration.</p>
 <h4>Arrange for other module(s) to receive events from this module</h4>
 <p>The <a href="http://docs.cmsmadesimple.org/quick-guide/using-cmsms-events" target="_new">CMSMS documentation</a> provides an overview.
 In brief, include installation code like:</p>
