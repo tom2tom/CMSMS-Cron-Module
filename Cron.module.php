@@ -1,21 +1,21 @@
 <?php
 #-------------------------------------------------------------------------
-# Module: Cron - allows modules to get cron notifications
-# Version: 0.1 Jean-Christophe Cuvelier
+# CMS Made Simple module: Cron (C) 2010-2015 Jean-Christophe Cuvelier
+# Allows other modules to get periodic notifications
 #-------------------------------------------------------------------------
 # CMS Made Simple (C) 2004-2015 Ted Kulp (wishy@cmsmadesimple.org)
-# This project's homepage is: http://www.cmsmadesimple.org
+# Its homepage is: http://www.cmsmadesimple.org
 #-------------------------------------------------------------------------
-# This program is free software; you can redistribute it and/or modify
+# This module is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
+# This module is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Affero General Public License for more details.
-# Read it online: http://www.gnu.org/licenses/licenses.html#AGPL
+# Read it online at http://www.gnu.org/licenses/licenses.html#AGPL
 #-------------------------------------------------------------------------
 
 class Cron extends CMSModule
@@ -75,12 +75,47 @@ class Cron extends CMSModule
 		$this->RestrictUnknownParams ();
 		$this->SetParameterType ('sendmode', CLEAN_STRING); //internal use only
 
-		$this->RegisterRoute ('/cron\/send$/', array('action' => 'send'));
-		$this->RegisterRoute ('/cron\/send\/(?P<sendmode>[\w]{2,10})$/',
-			array('action' => 'send'));
+		$returnid = cmsms()->GetContentOperations()->GetDefaultPageID(); //anything will do ?
+		$this->RegisterRoute ('/cron\/send$/',
+			array ('action' => 'send',
+			'showtemplate' => 'false', //not FALSE, or any of its alternates!
+			'returnid' => $returnid));
+		$this->RegisterRoute ('/cron\/send\/(?P<sendmode>[\w-]{2,10})$/',
+			array ('action' => 'send',
+			'showtemplate' => 'false',
+			'returnid' => $returnid));
 	}
 
-	public function GetEventDescription($eventname)
+	function DoAction ($action, $id, $params, $returnid = '')
+	{
+		switch ($action)
+		{
+		 case 'defaultadmin':
+			parent::DoAction ($action, $id, $params, $returnid);
+			return;
+		 case 'default':
+		 case 'send':
+	 		if (cron_utils::isme ())
+			{
+				if (isset ($params['sendmode']))
+				{
+					switch ($params['sendmode'])
+					{
+/*						case :
+						do stuff here
+						break;
+*/
+					}
+				}
+				else
+					cron_utils::sendEvents ($this);
+			}
+		 default:
+			exit;
+		}
+	}
+
+	function GetEventDescription($eventname)
 	{
 		if(strncmp ($eventname,'Cron',4) === 0)
 		{
@@ -90,7 +125,7 @@ class Cron extends CMSModule
 		return '';
 	}
 
-	public function GetEventHelp($eventname) 
+	function GetEventHelp($eventname) 
 	{
 		if(strncmp ($eventname,'Cron',4) === 0)
 			return $this->Lang ('timeparameter');
