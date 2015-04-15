@@ -61,13 +61,21 @@ $lang['help_module'] = <<<EOS
 <p>This module provides a convenient way for other modules to get periodic notifications, of several kinds.</p>
 <h3>How Do I Use It?</h3>
 <h4>Arrange for webserver to trigger the notifications</h4>
-<p>Configure the webserver to call, at 15-minute intervals:</p>
+<p>1. If pretty URL's are enabled for the website, configure the webserver to call,
+at 15-minute intervals:<br />
+&nbsp;&nbsp;[YOURSITEURL]/cron/send</p>
+<p>OR</p>
+<p>2. If pretty URL's are NOT enabled for the website</p>
 <ul>
-<li>if pretty URL's are enabled - [SITEURL]/cron/send</li>
-<li>otherwise - [SITEURL]/index.php?page=cronsend (where 'cronsend' is the alias of a site page (presumably hidden) that has a <pre>{Cron}</pre> tag on it)</li>
+<li>create a website template containing just<pre>{content assign='content'}</pre></li>
+<li>create a non-displayed website page, give it a suitable alias,
+apply the newly-created template, and make the page content just <pre>{Cron}</pre></li>
+<li>Configure the webserver to call, at 15-minute intervals:<br />
+&nbsp;&nbsp;[YOURSITEURL]/index.php?page=youralias<br />
+where 'youralias' is the alias of the page just created</li>
 </ul>
-e.g. cron on a linux server
-<pre>*/15 * * * * [/path/to/]curl http://www.example.com/cron/run</pre>
+<p>For crontab on a linux server and with pretty URL's
+<pre>*/15 * * * * [/path/to/]curl http://www.example.com/cron/send</pre>
 or on a Microsoft server, 'Scheduled Tasks' must be set up instead of cron.<br /><br />
 <a href="http://www.thesitewizard.com/general/set-cron-job.shtml" target="_new">This</a>
 and
