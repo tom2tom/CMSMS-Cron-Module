@@ -15,13 +15,14 @@ final class cron_utils
 
 	public static function getPeriods()
 	{
-		return array (
-		'qtrhr' => '-15 minutes',
-		'hour' => '-1 hour',
-		'day' => '-1 day', 
-		'week' => '-1 week', 
-		'month' => '-1 month', 
-		'year' => '-1 year');
+		return array(
+		 '15min' => '-15 minutes',
+		 'Hourly' => '-1 hour',
+		 'Daily' => '-1 day', 
+		 'Weekly' => '-1 week', 
+		 'Monthly' => '-1 month', 
+		 'Yearly' => '-1 year'
+		);
 	}
 
 	public static function sendEvents(&$module)
@@ -31,7 +32,7 @@ final class cron_utils
 		foreach ($periods as $period => $time)
 		{
 			$last = $module->GetPreference ('Last'.$period);
-			if ($last <= strtotime ($time, $now + 1))
+			if ($last <= strtotime ($time, $now))
 			{
 				$module->SetPreference ('Last'.$period, $now);
 				$module->SendEvent ('Cron'.$period, array ($now));

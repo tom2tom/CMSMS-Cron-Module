@@ -33,12 +33,12 @@ $lang['timeparameter'] = 'This event supplies one parameter: a timestamp represe
 $lang['unused'] = 'Never';
 $lang['upgraded'] = 'Module upgraded to version %s.';
 
-$lang['qtrhr'] = 'Quarter-hourly';
-$lang['hour'] = 'Hourly';
-$lang['day'] = 'Daily';
-$lang['week'] = 'Weekly';
-$lang['month'] = 'Monthly';
-$lang['year'] = 'Yearly';
+$lang['15min'] = 'Quarter-hourly';
+$lang['Hourly'] = 'Hourly';
+$lang['Daily'] = 'Daily';
+$lang['Weekly'] = 'Weekly';
+$lang['Monthly'] = 'Monthly';
+$lang['Yearly'] = 'Yearly';
 
 $lang['period_qtrhr'] = '15 minutes';
 $lang['period_hour'] = 'an hour';
@@ -83,7 +83,7 @@ and
 (among others) might be helpful for webserver configuration.</p>
 <h4>Arrange for other module(s) to receive events from this module</h4>
 <p>The <a href="http://docs.cmsmadesimple.org/quick-guide/using-cmsms-events" target="_new">CMSMS documentation</a> provides an overview.
-In brief, include installation code like:</p>
+In brief, include in each such module some installation code like:</p>
 <pre>\$this-&gt;AddEventHandler('Cron', 'eventname', false);</pre>
 <p>The supported eventnames are</p>
 <ul>
