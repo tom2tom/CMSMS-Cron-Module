@@ -6,8 +6,8 @@
 # CMS Made Simple (C) 2004-2015 Ted Kulp (wishy@cmsmadesimple.org)
 # Its homepage is: http://www.cmsmadesimple.org
 #-------------------------------------------------------------------------
-# This module is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published
+# This module is free software; you can redistribute it and/or modify it
+# under the terms of the GNU Affero General Public License as published
 # by the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
@@ -77,42 +77,13 @@ class Cron extends CMSModule
 
 		$returnid = cmsms()->GetContentOperations()->GetDefaultPageID(); //anything will do ?
 		$this->RegisterRoute ('/cron\/send$/',
-			array ('action' => 'send',
+			array ('action' => 'default',
 			'showtemplate' => 'false', //not FALSE, or any of its equivalents !
 			'returnid' => $returnid));
 		$this->RegisterRoute ('/cron\/send\/(?P<sendmode>[\w-]{2,10})$/',
-			array ('action' => 'send',
+			array ('action' => 'default',
 			'showtemplate' => 'false',
 			'returnid' => $returnid));
-	}
-
-	function DoAction ($action, $id, $params, $returnid = '')
-	{
-		switch ($action)
-		{
-		 case 'defaultadmin':
-			parent::DoAction ($action, $id, $params, $returnid);
-			return;
-		 case 'default':
-		 case 'send':
-	 		if (cron_utils::isme () && 1) //TODO suitable protection against invaders
-			{
-				if (isset ($params['sendmode']))
-				{
-					switch ($params['sendmode'])
-					{
-/*						case :
-						do stuff here
-						break;
-*/
-					}
-				}
-				else
-					cron_utils::sendEvents ($this);
-			}
-		 default:
-			exit;
-		}
 	}
 
 	function GetEventDescription($eventname)
@@ -131,7 +102,6 @@ class Cron extends CMSModule
 			return $this->Lang ('timeparameter');
 		return '';
 	}
-
 }
 
 ?>
