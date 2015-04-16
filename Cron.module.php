@@ -38,7 +38,7 @@ class Cron extends CMSModule
 	//for 1.11+
 	function AllowSmartyCaching()	{ return true; }
 	function LazyLoadAdmin()		{ return false; }
-	function LazyLoadFrontend() 	{ return true; }
+	function LazyLoadFrontend() 	{ return false; }
 
 	function GetChangeLog()
 	{
@@ -78,7 +78,7 @@ class Cron extends CMSModule
 		$returnid = cmsms()->GetContentOperations()->GetDefaultPageID(); //anything will do ?
 		$this->RegisterRoute ('/cron\/send$/',
 			array ('action' => 'send',
-			'showtemplate' => 'false', //not FALSE, or any of its alternates!
+			'showtemplate' => 'false', //not FALSE, or any of its equivalents !
 			'returnid' => $returnid));
 		$this->RegisterRoute ('/cron\/send\/(?P<sendmode>[\w-]{2,10})$/',
 			array ('action' => 'send',
@@ -95,7 +95,7 @@ class Cron extends CMSModule
 			return;
 		 case 'default':
 		 case 'send':
-	 		if (cron_utils::isme ())
+	 		if (cron_utils::isme () && 1) //TODO suitable protection against invaders
 			{
 				if (isset ($params['sendmode']))
 				{
