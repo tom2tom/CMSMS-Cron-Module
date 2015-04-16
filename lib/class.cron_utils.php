@@ -32,7 +32,7 @@ final class cron_utils
 		foreach ($periods as $period => $time)
 		{
 			$last = $module->GetPreference ('Last'.$period);
-			if ($last <= strtotime ($time, $now))
+			if ($last <= strtotime ($time, $now + 1))
 			{
 				$module->SetPreference ('Last'.$period, $now);
 				$module->SendEvent ('Cron'.$period, array ($now));
