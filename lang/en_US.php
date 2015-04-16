@@ -11,14 +11,12 @@ $lang['admindescription'] = 'This module provides a convenient way for other mod
 $lang['areyousure'] = 'Are you sure ?';
 
 $lang['error'] = 'Error!';
+$lang['event_name'] = 'Event frequency';
 
 $lang['friendlyname'] = 'Cron';
 
-$lang['help_showtemplate'] = 'TODO';
+$lang['last_sent'] = 'Last sent';
 
-$lang['last_used'] = 'Last sent on (Y-m-d)';
-
-$lang['period'] = 'Period';
 $lang['perm_review'] = 'Review status of sent Cron events';
 $lang['perm_send'] = 'Manually send Cron events';
 $lang['postinstall'] = 'Cron module successfully installed. After setting relevant permissions, read the module help to see what to do next.';
@@ -35,12 +33,12 @@ $lang['timeparameter'] = 'This event supplies one parameter: a timestamp represe
 $lang['unused'] = 'Never';
 $lang['upgraded'] = 'Module upgraded to version %s.';
 
-$lang['15min'] = 'Quarter-hourly';
-$lang['Hourly'] = 'Hourly';
-$lang['Daily'] = 'Daily';
-$lang['Weekly'] = 'Weekly';
-$lang['Monthly'] = 'Monthly';
-$lang['Yearly'] = 'Yearly';
+$lang['qtrhr'] = 'Quarter-hourly';
+$lang['hour'] = 'Hourly';
+$lang['day'] = 'Daily';
+$lang['week'] = 'Weekly';
+$lang['month'] = 'Monthly';
+$lang['year'] = 'Yearly';
 
 $lang['period_qtrhr'] = '15 minutes';
 $lang['period_hour'] = 'an hour';

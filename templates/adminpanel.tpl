@@ -1,8 +1,8 @@
 {if $periods|count > 0}
 <table class="pagetable">
  <thead><tr>
-  <th>{$title_period}</th>
-  <th>{$title_used}</th>
+  <th>{$title_name}</th>
+  <th>{$title_sent}</th>
  </tr></thead>
  <tbody>
 {foreach from=$periods item=one}

@@ -27,8 +27,8 @@ foreach ($global_periods as $period => $val)
 }
 
 $smarty->assign('periods', $periods);
-$smarty->assign('title_period', $this->Lang('period'));
-$smarty->assign('title_used', $this->Lang('last_used'));
+$smarty->assign('title_name', $this->Lang('event_name'));
+$smarty->assign('title_sent', $this->Lang('last_sent'));
 
 if ($psend)
 {
