@@ -20,9 +20,10 @@ $lang['last_sent'] = 'Last sent';
 $lang['perm_review'] = 'Review status of sent Cron events';
 $lang['perm_send'] = 'Manually send Cron events';
 $lang['postinstall'] = 'Cron module successfully installed. After setting relevant permissions, read the module help to see what to do next.';
-$lang['postuninstall'] = 'Cron module successfully uninstalled';
+$lang['postuninstall'] = 'Cron module successfully uninstalled. Remember to cancel the webserver\'s notifications.';
+$lang['postuninstall2'] = 'You will probably want to remove the dedicated site-page and template.';
 
-$lang['really_uninstall'] = 'Really? Are you sure you want to unsinstall the Cron module?';
+$lang['really_uninstall'] = 'Are you sure you want to unsinstall the Cron module?';
 $lang['run_cron'] = 'Send';
 $lang['run_tip'] = 'send all pending Cron* events to registered handlers';
 

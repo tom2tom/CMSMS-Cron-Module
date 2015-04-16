@@ -33,7 +33,6 @@ class Cron extends CMSModule
 	function InstallPostMessage()	{ return $this->Lang ('postinstall'); }
 	function IsPluginModule()		{ return true; }
 	function MinimumCMSVersion()	{ return '1.8'; }
-	function UninstallPostMessage()	{ return $this->Lang ('postuninstall'); }
 	function UninstallPreMessage()	{ return $this->Lang ('really_uninstall'); }
 	//for 1.11+
 	function AllowSmartyCaching()	{ return true; }
@@ -43,6 +42,15 @@ class Cron extends CMSModule
 	function GetChangeLog()
 	{
 		return ''.@file_get_contents(cms_join_path(dirname(__FILE__),'changelog.inc'));
+	}
+
+	function UninstallPostMessage()
+	{
+		$msg = $this->Lang ('postuninstall');
+		global $config;
+		if (empty ($config['url_rewriting']))
+			$msg .= ' '.$this->Lang ('postuninstall2');
+		return $msg;
 	}
 
 	function DisplayErrorPage($id, &$params, $return_id, $message='')
