@@ -49,7 +49,7 @@ class Cron extends CMSModule
 	{
 		$contentops = cmsms()->GetContentOperations();
 		$returnid = $contentops->GetDefaultContent();
-		$url = $this->CreateLink($id, 'default', $returnid, '', array(), '', TRUE, FALSE, '', FALSE, 'cron/send');
+		$url = $this->CreateLink($id, 'default', $returnid, '', array(), '', TRUE, FALSE, '', FALSE, 'Cron/send');
 		return $this->Lang ('help_module', $url);
 	}
 
@@ -84,11 +84,11 @@ class Cron extends CMSModule
 		$this->SetParameterType ('sendmode', CLEAN_STRING); //internal use only
 
 		$returnid = cmsms()->GetContentOperations()->GetDefaultPageID(); //anything will do ?
-		$this->RegisterRoute ('/cron\/send$/',
+		$this->RegisterRoute ('/[Cc]ron\/send$/',
 			array ('action' => 'default',
 			'showtemplate' => 'false', //not FALSE, or any of its equivalents !
 			'returnid' => $returnid));
-		$this->RegisterRoute ('/cron\/send\/(?P<sendmode>[\w-]{2,10})$/',
+		$this->RegisterRoute ('/[Cc]ron\/send\/(?P<sendmode>[\w-]{2,10})$/',
 			array ('action' => 'default',
 			'showtemplate' => 'false',
 			'returnid' => $returnid));
