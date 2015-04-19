@@ -26,13 +26,14 @@ class Cron extends CMSModule
 	function GetAuthorEmail()		{ return 'jcc@atomseeds.com'; }
 	function GetDependencies()		{ return array (); }
 	function GetFriendlyName()		{ return $this->Lang ('friendlyname'); }
-	function GetHelp()				{ return $this->Lang ('help_module'); }
 	function GetName()				{ return 'Cron'; }
 	function GetVersion()			{ return '0.1'; }
 	function HasAdmin()				{ return true; }
 	function InstallPostMessage()	{ return $this->Lang ('postinstall'); }
 	function IsPluginModule()		{ return true; }
+	function MaximumCMSVersion()	{ return '1.19.99'; } //i.e. not (yet) 2+
 	function MinimumCMSVersion()	{ return '1.8'; }
+	function UninstallPostMessage()	{ return $this->Lang ('postuninstall'); }
 	function UninstallPreMessage()	{ return $this->Lang ('really_uninstall'); }
 	//for 1.11+
 	function AllowSmartyCaching()	{ return true; }
@@ -41,16 +42,15 @@ class Cron extends CMSModule
 
 	function GetChangeLog()
 	{
-		return ''.@file_get_contents(cms_join_path(dirname(__FILE__),'changelog.inc'));
+		return ''.@file_get_contents(cms_join_path(dirname(__FILE__), 'changelog.inc'));
 	}
 
-	function UninstallPostMessage()
+	function GetHelp()
 	{
-		$msg = $this->Lang ('postuninstall');
-		global $config;
-		if (empty ($config['url_rewriting']))
-			$msg .= ' '.$this->Lang ('postuninstall2');
-		return $msg;
+		$contentops = cmsms()->GetContentOperations();
+		$returnid = $contentops->GetDefaultContent();
+		$url = $this->CreateLink($id, 'default', $returnid, '', array(), '', TRUE, FALSE, '', FALSE, 'cron/send');
+		return $this->Lang ('help_module', $url);
 	}
 
 	function DisplayErrorPage($id, &$params, $return_id, $message='')

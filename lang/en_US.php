@@ -21,7 +21,6 @@ $lang['perm_review'] = 'Review status of sent Cron events';
 $lang['perm_send'] = 'Manually send Cron events';
 $lang['postinstall'] = 'Cron module successfully installed. After setting relevant permissions, read the module help to see what to do next.';
 $lang['postuninstall'] = 'Cron module successfully uninstalled. Remember to cancel the webserver\'s notifications.';
-$lang['postuninstall2'] = 'You will probably want to remove the dedicated site-page and template.';
 
 $lang['really_uninstall'] = 'Are you sure you want to unsinstall the Cron module?';
 $lang['run_cron'] = 'Send';
@@ -60,22 +59,10 @@ $lang['help_module'] = <<<EOS
 <p>This module provides a convenient way for other modules to get periodic notifications, of several kinds.</p>
 <h3>How Do I Use It?</h3>
 <h4>Arrange for webserver to trigger the notifications</h4>
-<p>1. If pretty URL's are enabled for the website, configure the webserver to call,
-at 15-minute intervals:<br />
-&nbsp;&nbsp;[YOURSITEURL]/cron/send</p>
-<p>OR</p>
-<p>2. If pretty URL's are NOT enabled for the website</p>
-<ul>
-<li>create a website template containing just<pre>{content assign='content'}</pre></li>
-<li>create a non-displayed website page, give it a suitable alias,
-apply the newly-created template, and make the page content just <pre>{Cron}</pre></li>
-<li>Configure the webserver to call, at 15-minute intervals:<br />
-&nbsp;&nbsp;[YOURSITEURL]/index.php?page=youralias<br />
-where 'youralias' is the alias of the page just created</li>
-</ul>
-<p>For crontab on a linux server and with pretty URL's
-<pre>*/15 * * * * [/path/to/]curl http://www.example.com/cron/send</pre>
-or on a Microsoft server, 'Scheduled Tasks' must be set up instead of cron.<br /><br />
+<p>Configure the webserver to call the relevant website URL, at 15-minute intervals<br />
+e.g. for crontab on a linux server
+<pre>*/15 * * * * [/path/to/]curl %s</pre>
+or on a Microsoft server, 'Scheduled Tasks' must be set up instead.<br /><br />
 <a href="http://www.thesitewizard.com/general/set-cron-job.shtml" target="_new">This</a>
 and
 <a href="https://documentation.cpanel.net/display/ALD/Cron+Jobs" target="_new">this</a>
