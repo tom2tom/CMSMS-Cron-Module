@@ -60,8 +60,8 @@ $lang['help_module'] = <<<EOS
 <h3>How Do I Use It?</h3>
 <h4>Arrange for webserver to trigger the notifications</h4>
 <p>Configure the webserver to call the relevant website URL, at 15-minute intervals<br />
-e.g. for crontab on a linux server
-<pre>*/15 * * * * [/path/to/]curl %s</pre>
+e.g. for crontab on a linux server<br /><br />
+<code>*/15 * * * * [/path/to/]curl %s</code><br /><br />
 or on a Microsoft server, 'Scheduled Tasks' must be set up instead.<br /><br />
 <a href="http://www.thesitewizard.com/general/set-cron-job.shtml" target="_new">This</a>
 and
@@ -72,7 +72,7 @@ and
 <h4>Arrange for other module(s) to receive events from this module</h4>
 <p>The <a href="http://docs.cmsmadesimple.org/quick-guide/using-cmsms-events" target="_new">CMSMS documentation</a> provides an overview.
 In brief, include in each such module some installation code like:</p>
-<pre>\$this-&gt;AddEventHandler('Cron', 'eventname', false);</pre>
+<code>\$this-&gt;AddEventHandler('Cron', 'eventname', false);</code><br /><br />
 <p>The supported eventnames are</p>
 <ul>
 <li>'Cron15min'</li>
@@ -84,18 +84,18 @@ In brief, include in each such module some installation code like:</p>
 </ul>
 <br />
 <p>and include in the module-class some methods:</p>
-<pre>public function HandlesEvents()
-{
- return true;
-}
-
-public function DoEvent(\$originator, \$eventname, &amp;\$params)
-{
- if (\$eventname == 'CronDaily') //or other event name
- {
-  // do stuff here
- }
-}</pre>
+<code>public function HandlesEvents()<br />
+{<br />
+&nbsp;return true;<br />
+}<br />
+<br />
+public function DoEvent(\$originator, \$eventname, &amp;\$params)<br />
+{<br />
+&nbsp;if (\$eventname == 'CronDaily') //or other event name<br />
+&nbsp;{<br />
+&nbsp;&nbsp;// do stuff here<br />
+&nbsp;}<br />
+}</code>
 <h3>Support</h3>
 <p>This software is provided as-is. Please read the text of the license for the full disclaimer.</p>
 <p>For help:</p>
