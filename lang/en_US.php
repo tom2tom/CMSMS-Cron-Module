@@ -13,6 +13,8 @@ $lang['areyousure'] = 'Are you sure ?';
 $lang['error'] = 'Error!';
 $lang['event_name'] = 'Event frequency';
 
+$lang['force_cron'] = 'Send All';
+$lang['force_tip'] = 'immediately send all Cron* events to registered handlers';
 $lang['friendlyname'] = 'Cron';
 
 $lang['last_sent'] = 'Last sent';
