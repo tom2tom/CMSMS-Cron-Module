@@ -25,14 +25,20 @@ final class cron_utils
 		);
 	}
 
-	public static function sendEvents(&$module)
+	public static function sendEvents(&$module, $force = FALSE)
 	{
 		$now = time();
 		$periods = self::getPeriods();
 		foreach ($periods as $period => $time)
 		{
-			$last = $module->GetPreference ('Last'.$period);
-			if ($last <= strtotime ($time, $now + 1))
+			if ($force)
+				$send = TRUE;
+			else
+			{
+				$last = $module->GetPreference ('Last'.$period);
+				$send = ($last <= strtotime ($time, $now + 1));
+			}
+			if ($send)
 			{
 				$module->SetPreference ('Last'.$period, $now);
 				$module->SendEvent ('Cron'.$period, array ($now));
