@@ -1,27 +1,22 @@
 Setup to receive periodic notices from the webserver
 
-1. If pretty URL's are enabled for the website, configure the webserver to call,
-   at 15-minute intervals:
-    [YOURSITEURL]/cron/send
+If pretty URL's are enabled for the website, configure the webserver to call,
+at 15-minute intervals:
+  [YOURSITEURL]/Cron/send
 
 OR
 
-2. If pretty URL's are NOT enabled for the website:
-   i.  First, create a website template containing just
-        {content assign='content'}
-       which will result in a blank page being displayed 
-   ii. Next, create a non-displayed website page, give that page a suitable
-       alias, apply the newly-created template, and make the page content
-	   just
-        {Cron}
-   iii. Configure the webserver to call, at 15-minute intervals:
-          [YOURSITEURL]/index.php?page=youralias
-	    where 'youralias' is the alias of the page just created
+If pretty URL's are NOT enabled, configure the webserver to call,
+at 15-minute intervals:
+  [YOURSITEURL]/index.php?mact=Cron,cntnt01,default,0&cntnt01returnid=NUM
+where NUM is a valid page-index (typically the id for the default page)
 
-Crontab settings for a linux server
-*/15 * * * * [/path/to/]curl [YOURSITEURL]/cron/send
+Crontab settings for a linux server and pretty urls e.g.
+*/15 * * * * [/path/to/]curl [YOURSITEURL]/Cron/send
 OR
-*/15 * * * * [/path/to/]curl [YOURSITEURL]/index.php?page=youralias
+*/15 * * * * [/path/to/]curl [YOURSITEURL]/Cron/send 1>/dev/null 2>&1
+OR
+1,16,31,46 * * * * [/path/to/]curl [YOURSITEURL]/Cron/send
 
 'Scheduled Tasks' settings for a Microsoft server
 TODO advice needed
