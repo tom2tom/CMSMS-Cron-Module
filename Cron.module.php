@@ -47,9 +47,9 @@ class Cron extends CMSModule
 
 	function GetHelp()
 	{
-		$contentops = cmsms()->GetContentOperations();
-		$returnid = $contentops->GetDefaultContent();
-		$url = $this->CreateLink($id, 'default', $returnid, '', array(), '', TRUE, FALSE, '', FALSE, 'Cron/send');
+		$returnid = cmsms()->GetContentOperations()->GetDefaultContent();
+		//cmsms 1.10+ also has ->create_url();
+		$url = $this->CreateLink('m1_', 'default', $returnid, '', array(), '', TRUE, FALSE, '', FALSE, 'Cron/send');
 		return $this->Lang ('help_module', $url);
 	}
 
