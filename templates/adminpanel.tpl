@@ -1,8 +1,7 @@
-{if $periods|count > 0}
-<table class="pagetable">
+<table class="pagetable" style="margin-left:5%;width:auto;table-layout:auto;">
  <thead><tr>
-  <th>{$title_name}</th>
-  <th>{$title_sent}</th>
+  <th><strong>{$title_name}</strong></th>
+  <th><strong>{$title_sent}</strong></th>
  </tr></thead>
  <tbody>
 {foreach from=$periods item=one}
@@ -14,8 +13,7 @@
 {/foreach}
  </tbody>
 </table>
-<br /><br />
+{if !empty($startform) && $periods|count > 0}<br /><br />
 {$startform}
-<p class="pageinput">{$runcron}</p>
-{$endform}
-{/if}
+<p class="pageinput">{$runcron} {$forcecron}</p>
+{$endform}{/if}
