@@ -20,6 +20,18 @@
 
 class Cron extends CMSModule
 {
+	function __construct()
+	{
+		parent::__construct();
+		global $CMS_VERSION;
+		if(version_compare ($CMS_VERSION, '1.10') < 0)
+		{
+			//class autoloading not supported
+			$fn = cms_join_path (dirname(__FILE__), 'lib', 'class.cron_utils.php');
+			require_once $fn;
+		}
+	}
+
 	function GetAdminDescription()	{ return $this->Lang ('admindescription'); }
 	function GetAdminSection()		{ return 'siteadmin'; }
 	function GetAuthor()			{ return 'Jean-Christophe Cuvelier'; }
@@ -73,10 +85,10 @@ class Cron extends CMSModule
 		$this->InitializeFrontend (); 
 	}
 
-	function InitializeAdmin()
+/*	function InitializeAdmin()
 	{
 	}
-
+*/
 	function InitializeFrontend()
 	{
 		$this->RegisterModulePlugin ();
@@ -88,7 +100,7 @@ class Cron extends CMSModule
 			array ('action' => 'default',
 			'showtemplate' => 'false', //not FALSE, or any of its equivalents !
 			'returnid' => $returnid));
-		$this->RegisterRoute ('/[Cc]ron\/send\/(?P<sendmode>[\w-]{2,10})$/',
+		$this->RegisterRoute ('/[Cc]ron\/send\/(?P<sendmode>[\w\-]{2,10})$/',
 			array ('action' => 'default',
 			'showtemplate' => 'false',
 			'returnid' => $returnid));
