@@ -85,10 +85,11 @@ class Cron extends CMSModule
 		$this->InitializeFrontend (); 
 	}
 
-/*	function InitializeAdmin()
+	function InitializeAdmin()
 	{
+		//this is needed to block construct-time circularity
 	}
-*/
+
 	function InitializeFrontend()
 	{
 		$this->RegisterModulePlugin ();
