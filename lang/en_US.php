@@ -63,7 +63,7 @@ $lang['help_module'] = <<<EOS
 <h4>Arrange for webserver to trigger the notifications</h4>
 <p>Configure the webserver to call the relevant website URL, at 15-minute intervals<br />
 e.g. for crontab on a linux server<br /><br />
-<code>*/15 * * * * [/path/to/]curl %s</code><br /><br />
+<code>*/15 * * * * [/path/to/]curl [curl-options] %s</code><br /><br />
 or on a Microsoft server, 'Scheduled Tasks' must be set up instead.<br /><br />
 <a href="http://www.thesitewizard.com/general/set-cron-job.shtml" target="_new">This</a>
 and
