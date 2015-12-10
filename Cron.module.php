@@ -20,16 +20,18 @@
 
 class Cron extends CMSModule
 {
+	public $before20;
 	function __construct()
 	{
 		parent::__construct();
 		global $CMS_VERSION;
-		if(version_compare ($CMS_VERSION, '1.10') < 0)
+		if(version_compare($CMS_VERSION,'1.10') < 0)
 		{
 			//class autoloading not supported?
 			$fn = cms_join_path (dirname(__FILE__), 'lib', 'class.cron_utils.php');
 			require_once $fn;
 		}
+		$this->before20 = (version_compare($CMS_VERSION,'2.0') < 0);
 	}
 
 	function GetAdminDescription()	{ return $this->Lang ('admindescription'); }
