@@ -45,6 +45,42 @@ final class cron_utils
 			}
 		}
 	}
+
+	public static function ProcessTemplate(&$mod,$tplname,$tplvars,$cache=TRUE)
+	{
+		global $smarty;
+		if($mod->before20)
+		{
+			$smarty->assign($tplvars);
+			echo $mod->ProcessTemplate($tplname);
+		}
+		else
+		{
+			if($cache)
+			{
+				$cache_id = md5('cron'.$tplname.serialize(array_keys($tplvars)));
+				$lang = CmsNlsOperations::get_current_language();
+				$compile_id = md5('cron'.$tplname.$lang);
+				$tpl = $smarty->CreateTemplate($mod->GetFileResource($tplname),$cache_id,compile_id,$smarty);
+				if(!$tpl->isCached())
+					$tpl->assign($tplvars);
+			}
+			else
+			{
+				$tpl = $smarty->CreateTemplate($mod->GetFileResource($tplname),NULL,NULL,$smarty,$tplvars);
+			}
+			$tpl->display();
+		}
+	}
+
+	public static function DisplayErrorPage(&$mod,$message='')
+	{
+		$tplvars = array('title_error' => $this->Lang('error'));
+		if($message)
+			$tplvars['message'] = $message;
+		self::ProcessTemplate($mod,'error.tpl',$tplvars);
+	}
+
 }
 
 ?>
