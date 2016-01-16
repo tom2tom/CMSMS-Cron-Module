@@ -9,7 +9,10 @@
 if (!cron_utils::isme()) exit;
 
 if (!$this->VisibleToAdminUser ())
-	return $this->DisplayErrorPage($id, $params, $returnid, $this->Lang('accessdenied'));
+{
+	cron_utils::DisplayErrorPage ($this,$this->Lang('accessdenied'));
+	return;
+}
 
 $psend = $this->CheckPermission ('SendCronEvents');
 if ($psend)
@@ -31,23 +34,25 @@ foreach ($global_periods as $period => $val)
 	$periods[] = $obj;
 }
 
-$smarty->assign('periods', $periods);
-$smarty->assign('title_name', $this->Lang('event_name'));
-$smarty->assign('title_sent', $this->Lang('last_sent'));
+$tplvars = array(
+	'periods' => $periods,
+	'title_name' => $this->Lang('event_name'),
+	'title_sent' => $this->Lang('last_sent')
+);
 
 if ($psend)
 {
-	$smarty->assign ('startform', $this->CreateFormStart ($id, 'defaultadmin', $returnid));
-	$smarty->assign ('endform', $this->CreateFormEnd ());
 	$conf = $this->Lang ('areyousure');
-	$smarty->assign ('runcron', $this->CreateInputSubmit ($id, 'sendnow',
-		$this->Lang ('run_cron'),
-		'title = "'.$this->Lang ('run_tip').'" onclick="return confirm(\''.$conf.'\');"'));
-	$smarty->assign ('forcecron',$this->CreateInputSubmit ($id, 'forcenow',
-		$this->Lang ('force_cron'),
-		'title = "'.$this->Lang ('force_tip').'" onclick="return confirm(\''.$conf.'\');"'));
+	$tplvars = $tplvars + array(
+		'startform' => $this->CreateFormStart ($id, 'defaultadmin', $returnid),
+		'endform' => $this->CreateFormEnd (),
+		'runcron' => $this->CreateInputSubmit ($id, 'sendnow', $this->Lang ('run_cron'),
+			'title = "'.$this->Lang ('run_tip').'" onclick="return confirm(\''.$conf.'\');"'),
+		'forcecron' => $this->CreateInputSubmit ($id, 'forcenow', $this->Lang ('force_cron'),
+			'title = "'.$this->Lang ('force_tip').'" onclick="return confirm(\''.$conf.'\');"')
+	);
 }
 
-echo $this->ProcessTemplate ('adminpanel.tpl');
+cron_utils::ProcessTemplate ($this, 'adminpanel.tpl', $tplvars);
 
 ?>
