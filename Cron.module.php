@@ -41,11 +41,11 @@ class Cron extends CMSModule
 	function GetDependencies()		{ return array (); }
 	function GetFriendlyName()		{ return $this->Lang ('friendlyname'); }
 	function GetName()				{ return 'Cron'; }
-	function GetVersion()			{ return '0.1'; }
+	function GetVersion()			{ return '0.2'; }
 	function HasAdmin()				{ return true; }
 	function InstallPostMessage()	{ return $this->Lang ('postinstall'); }
 	function IsPluginModule()		{ return true; }
-	function MaximumCMSVersion()	{ return '1.19.99'; } //i.e. not (yet) 2+
+//	function MaximumCMSVersion()	{ return 'X' }
 	function MinimumCMSVersion()	{ return '1.8'; }
 	function UninstallPostMessage()	{ return $this->Lang ('postuninstall'); }
 	function UninstallPreMessage()	{ return $this->Lang ('really_uninstall'); }

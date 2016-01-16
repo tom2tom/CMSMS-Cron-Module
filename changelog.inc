@@ -25,7 +25,11 @@
  <li>Support CMSMS up to 1.11.x</li>
  <li>UI tweaks</li>
  <li>Bugfixes</li>
- <li></li>
+ </ul>
+</li>
+<li>Version 0.2 - January 2016
+ <ul>
+ <li>Support CMSMS 1.12.x, 2+</li>
  </ul>
 </li>
 </ul>
