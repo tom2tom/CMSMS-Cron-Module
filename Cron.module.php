@@ -69,13 +69,6 @@ class Cron extends CMSModule
 		return $this->Lang ('help_module', substr($url, 0, $sep));
 	}
 
-	function DisplayErrorPage($id, &$params, $return_id, $message='')
-	{
-		$smarty->assign ('title_error', $this->Lang('error'));
-		$smarty->assign ('message', $message);
-		echo $this->ProcessTemplate ('error.tpl');
-	}
-
 	function VisibleToAdminUser()
 	{
 		return
