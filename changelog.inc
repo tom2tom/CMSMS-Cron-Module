@@ -30,6 +30,7 @@
 <li>Version 0.2 - January 2016
  <ul>
  <li>Support CMSMS 1.12.x, 2+</li>
+ <li>Remove support for triggering via pretty-url</li>
  </ul>
 </li>
 </ul>
