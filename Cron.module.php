@@ -35,7 +35,7 @@ class Cron extends CMSModule
 	}
 
 	function GetAdminDescription()	{ return $this->Lang ('admindescription'); }
-	function GetAdminSection()		{ return 'siteadmin'; }
+	function GetAdminSection()		{ return 'extensions'; }
 	function GetAuthor()			{ return 'Jean-Christophe Cuvelier'; }
 	function GetAuthorEmail()		{ return 'jcc@atomseeds.com'; }
 	function GetDependencies()		{ return array (); }
