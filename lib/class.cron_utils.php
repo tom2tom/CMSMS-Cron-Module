@@ -61,7 +61,7 @@ final class cron_utils
 				$cache_id = md5('cron'.$tplname.serialize(array_keys($tplvars)));
 				$lang = CmsNlsOperations::get_current_language();
 				$compile_id = md5('cron'.$tplname.$lang);
-				$tpl = $smarty->CreateTemplate($mod->GetFileResource($tplname),$cache_id,compile_id,$smarty);
+				$tpl = $smarty->CreateTemplate($mod->GetFileResource($tplname),$cache_id,$compile_id,$smarty);
 				if(!$tpl->isCached())
 					$tpl->assign($tplvars);
 			}
