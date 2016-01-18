@@ -26,7 +26,7 @@ $lang['postuninstall'] = 'Cron module successfully uninstalled. Remember to canc
 
 $lang['really_uninstall'] = 'Are you sure you want to unsinstall the Cron module?';
 $lang['run_cron'] = 'Send';
-$lang['run_tip'] = 'send all pending Cron* events to registered handlers';
+$lang['run_tip'] = 'send each pending Cron* event to registered handlers';
 
 $lang['send_frequency'] = 'Sent at intervals of approximately %s';
 
