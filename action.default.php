@@ -20,6 +20,15 @@ if (cron_utils::isme () && 1) //TODO suitable protection against invaders
 */
 	cron_utils::sendEvents ($this);
 }
-exit;
 
+//clear all page content echoed before now
+$handlers = ob_list_handlers();
+if($handlers)
+{
+	$l = count($handlers);
+	for ($c = 0; $c < $l; $c++)
+		ob_end_clean();
+}
+
+exit;
 ?>
