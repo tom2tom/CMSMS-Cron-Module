@@ -105,14 +105,10 @@ public function DoEvent(\$originator, \$eventname, &amp;\$params)<br />
 }</code>
 <h3>Support</h3>
 <p>This software is provided as-is. Please read the text of the license for the full disclaimer.</p>
-<p>For help:</p>
-<ul>
-<li>discussion may be found in the <a href="http://forum.cmsmadesimple.org">CMS Made Simple Forums</a>; or</li>
-<li>you might have some success emailing the author directly.</li>
-</ul>
+<p>For help, discussion may be found in the <a href="http://forum.cmsmadesimple.org">CMS Made Simple Forums</a>.</p>
 <p>For the latest version of the module, or to report a bug, visit the module's <a href="http://dev.cmsmadesimple.org/projects/cron">forge-page</a>.</p>
 <h3>Copyright and License</h3>
-<p>Copyright &copy; 2010-2016 Jean-Christophe Cuvelier &lt;<a href="mailto:jcc@morris-chapman.com">jcc@morris-chapman.com</a>&gt;. All rights reserved.</p>
+<p>Copyright &copy; 2010-2016 Jean-Christophe Cuvelier &lt;cybertotophe@gmail.com&gt;. All rights reserved.</p>
 <p>This module has been released under the <a href="http://www.gnu.org/licenses/licenses.html#AGPL">GNU Affero General Public License</a> version 3. The module may not be used otherwise than in accordance with the terms of that license.</p>
 EOS;
 
