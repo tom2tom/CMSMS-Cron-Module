@@ -8,8 +8,11 @@ Configure the webserver to call, at 15-minute intervals:
 ## Linux Setup
 
 Crontab settings for a linux server e.g.
+
 ```*/15 * * * * [/path/to/]curl [YOURSITEURL]/index.php?mact=Cron,cntnt01,default,0 1>/dev/null 2>&1```
+
 OR
+
 ```1,16,31,46 * * * * [/path/to/]curl [YOURSITEURL]/index.php?mact=Cron,cntnt01,default,0 1>/dev/null 2>&1```
 
 ## Windows Setup
