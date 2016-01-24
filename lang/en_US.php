@@ -64,12 +64,17 @@ $lang['help_module'] = <<<EOS
 <p>Configure the webserver to call the relevant website URL, at 15-minute intervals<br />
 e.g. for crontab on a linux server<br /><br />
 <code>*/15 * * * * [/path/to/]curl [curl-options] %s</code><br /><br />
-or on a Microsoft server, 'Scheduled Tasks' must be set up instead.<br /><br />
+Support for pretty-url callback<br /><br />
+<code>*/15 * * * * [/path/to/]curl [curl-options] %s</code><br /><br />
+is deprecated (as it's preferable to not involve the module frontend at all).<br /><br />
+On a Microsoft server, arrange for Task Scheduler to reqularly run a script which opens the URL.<br /><br />
 <a href="http://www.thesitewizard.com/general/set-cron-job.shtml" target="_new">This</a>
 and
 <a href="https://documentation.cpanel.net/display/ALD/Cron+Jobs" target="_new">this</a>
 and
 <a href="http://code.tutsplus.com/tutorials/managing-cron-jobs-with-php-2--net-19428" target="_new">this</a>
+and
+<a href="http://www.peterviola.com/windows-server-scheduled-task-for-opening-web-site-url" target="_new">this (for windows)</a>
 (among others) might be helpful for webserver configuration.</p>
 <h4>Arrange for other module(s) to receive events from this module</h4>
 <p>The <a href="http://docs.cmsmadesimple.org/quick-guide/using-cmsms-events" target="_new">CMSMS documentation</a> provides an overview.
@@ -107,7 +112,7 @@ public function DoEvent(\$originator, \$eventname, &amp;\$params)<br />
 </ul>
 <p>For the latest version of the module, or to report a bug, visit the module's <a href="http://dev.cmsmadesimple.org/projects/cron">forge-page</a>.</p>
 <h3>Copyright and License</h3>
-<p>Copyright &copy; 2010-2015 Jean-Christophe Cuvelier &lt;<a href="mailto:jcc@morris-chapman.com">jcc@morris-chapman.com</a>&gt;. All rights reserved.</p>
+<p>Copyright &copy; 2010-2016 Jean-Christophe Cuvelier &lt;<a href="mailto:jcc@morris-chapman.com">jcc@morris-chapman.com</a>&gt;. All rights reserved.</p>
 <p>This module has been released under the <a href="http://www.gnu.org/licenses/licenses.html#AGPL">GNU Affero General Public License</a> version 3. The module may not be used otherwise than in accordance with the terms of that license.</p>
 EOS;
 
