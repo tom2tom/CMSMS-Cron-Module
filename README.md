@@ -1,17 +1,13 @@
 # CMSMS Cron
-
-This module allows use of a real cron to initiate events in CMS Made Simple
-
+This [CMS Made Simple](http://cmsmadesimple.org) module makes it possible to use
+a *real* cron to initiate events in a CMSMS-powered website.
 ## Installation
-
-[doc/setup.md](doc/setup.md)
-
+[README](doc/setup.md)
 ## Maintainers
-
 [tom2tom](https://github.com/tom2tom)
-
 ## Changelog
-* includes some bugfixes and some modernisation, supports CMSMS2.
-
+* some modernisation
+* support for CMSMS2
+* bugfixes
 ## Forge
-You can find this module on the CMSMS [Forge](http://dev.cmsmadesimple.org/projects/cron).
+You can also find this module at the CMSMS [Forge](http://dev.cmsmadesimple.org/projects/cron).
