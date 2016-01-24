@@ -5,9 +5,9 @@
 Configure the webserver to call, at 15-minute intervals:
  [YOURSITEURL]/index.php?mact=Cron,cntnt01,default,0
 
-## Linux Setup
+## Linux setup
 
-Crontab settings for a linux server e.g.
+Crontab settings e.g.
 
 ```*/15 * * * * [/path/to/]curl [YOURSITEURL]/index.php?mact=Cron,cntnt01,default,0 1>/dev/null 2>&1```
 
@@ -15,7 +15,7 @@ OR
 
 ```1,16,31,46 * * * * [/path/to/]curl [YOURSITEURL]/index.php?mact=Cron,cntnt01,default,0 1>/dev/null 2>&1```
 
-## Windows Setup
+## Windows setup
 
 Arrange for Task Scheduler to run a script.
 
