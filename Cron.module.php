@@ -1,9 +1,9 @@
 <?php
 #-----------------------------------------------------------------------
-# CMS Made Simple module: Cron (C) 2010-2015 Jean-Christophe Cuvelier
+# CMS Made Simple module: Cron (C) 2010-2016 Jean-Christophe Cuvelier
 # Allows other modules to get periodic notifications
 #-----------------------------------------------------------------------
-# CMS Made Simple (C) 2004-2015 Ted Kulp (wishy@cmsmadesimple.org)
+# CMS Made Simple (C) 2004-2016 Ted Kulp (wishy@cmsmadesimple.org)
 # Its homepage is: http://www.cmsmadesimple.org
 #-----------------------------------------------------------------------
 # This module is free software; you can redistribute it and/or modify it
@@ -50,7 +50,7 @@ class Cron extends CMSModule
 	function UninstallPostMessage()	{ return $this->Lang ('postuninstall'); }
 	function UninstallPreMessage()	{ return $this->Lang ('really_uninstall'); }
 	//for 1.11+
-	function AllowSmartyCaching()	{ return true; }
+	function AllowSmartyCaching()	{ return false; }
 	function LazyLoadAdmin()		{ return false; }
 	function LazyLoadFrontend() 	{ return false; }
 
@@ -63,10 +63,14 @@ class Cron extends CMSModule
 	{
 		//construct frontend-url (so no admin login is needed)
 		//cmsms 1.10+ also has ->create_url();
-		$url = $this->CreateLink ('_', 'default', 1, '', array(), '', TRUE);
+		//deprecated pretty-url
+		$returnid = cmsms()->GetContentOperations()->GetDefaultContent();
+		$oldurl = $this->CreateLink($id,'default',$returnid,'',array(),'',TRUE,FALSE,'',FALSE,'cron/run');
+		$url = $this->CreateLink ('_','default',1,'',array(),'',TRUE);
 		//strip the fake returnid, so that the default will be used
 		$sep = strpos ($url, '&amp;');
-		return $this->Lang ('help_module', substr($url, 0, $sep));
+		$newurl = substr($url, 0, $sep);
+		return $this->Lang ('help_module',$newurl,$oldurl);
 	}
 
 	function VisibleToAdminUser()
@@ -89,6 +93,16 @@ class Cron extends CMSModule
 
 	function InitializeFrontend()
 	{
+		//pretty-url support is deprecated - better to not involve frontend
+		//all of this can go, when support is removed
+		$this->RestrictUnknownParams();
+		$this->SetParameterType('showtemplate',CLEAN_STRING);
+		$rid = cmsms()->GetContentOperations()->GetDefaultPageID();
+		$this->RegisterRoute('/[Cc]ron\/([a-zA-Z0-9_-]+)(\/.*?)?$/',
+			array('action' => 'default', 
+				'showtemplate' => 'false', //NOT FALSE or any of its equivalents
+				'returnid' => $rid
+			));
 	}
 
 	function GetEventDescription($eventname)
