@@ -35,7 +35,7 @@ final class cron_utils
 				$send = TRUE;
 			else
 			{
-				$last = $module->GetPreference ('Last'.$period);
+				$last = (int)$module->GetPreference ('Last'.$period);
 				$send = ($last <= strtotime ($time, $now + 1));
 			}
 			if ($send)
