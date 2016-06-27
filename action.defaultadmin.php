@@ -53,6 +53,6 @@ if ($psend)
 	);
 }
 
-cron_utils::ProcessTemplate ($this, 'adminpanel.tpl', $tplvars);
+echo cron_utils::ProcessTemplate ($this, 'adminpanel.tpl', $tplvars);
 
 ?>

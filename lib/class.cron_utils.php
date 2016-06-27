@@ -52,7 +52,7 @@ final class cron_utils
 		if($mod->before20)
 		{
 			$smarty->assign($tplvars);
-			echo $mod->ProcessTemplate($tplname);
+			return $mod->ProcessTemplate($tplname);
 		}
 		else
 		{
@@ -69,7 +69,7 @@ final class cron_utils
 			{
 				$tpl = $smarty->CreateTemplate($mod->GetFileResource($tplname),NULL,NULL,$smarty,$tplvars);
 			}
-			$tpl->display();
+			return $tpl->fetch();
 		}
 	}
 
@@ -78,7 +78,7 @@ final class cron_utils
 		$tplvars = array('title_error' => $this->Lang('error'));
 		if($message)
 			$tplvars['message'] = $message;
-		self::ProcessTemplate($mod,'error.tpl',$tplvars);
+		echo self::ProcessTemplate($mod,'error.tpl',$tplvars);
 	}
 
 }
