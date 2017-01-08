@@ -6,27 +6,27 @@
 # More info at http://dev.cmsmadesimple.org/projects/cron
 #----------------------------------------------------------------------
 
-if (!cron_utils::isme()) exit;
+if (!cron_utils::isme()) {
+	exit;
+}
 
-if (!$this->VisibleToAdminUser ())
-{
-	cron_utils::DisplayErrorPage ($this,$this->Lang('accessdenied'));
+if (!$this->VisibleToAdminUser()) {
+	cron_utils::DisplayErrorPage($this, $this->Lang('accessdenied'));
 	return;
 }
 
-$psend = $this->CheckPermission ('SendCronEvents');
-if ($psend)
-{
-	if (isset ($params['sendnow']))
-		cron_utils::sendEvents ($this, FALSE);
-	elseif (isset ($params['forcenow']))
-		cron_utils::sendEvents ($this, TRUE);
+$psend = $this->CheckPermission('SendCronEvents');
+if ($psend) {
+	if (isset($params['sendnow'])) {
+		cron_utils::sendEvents($this, FALSE);
+	} elseif (isset($params['forcenow'])) {
+		cron_utils::sendEvents($this, TRUE);
+	}
 }
 
 $global_periods = cron_utils::getPeriods();
 $periods = array();
-foreach ($global_periods as $period => $val)
-{
+foreach ($global_periods as $period => $val) {
 	$obj = new StdClass();
 	$obj->name = $this->Lang($period);
 	$when = (int)$this->GetPreference('Last'.$period);
@@ -40,19 +40,16 @@ $tplvars = array(
 	'title_sent' => $this->Lang('last_sent')
 );
 
-if ($psend)
-{
-	$conf = $this->Lang ('areyousure');
+if ($psend) {
+	$conf = $this->Lang('areyousure');
 	$tplvars = $tplvars + array(
-		'startform' => $this->CreateFormStart ($id, 'defaultadmin', $returnid),
-		'endform' => $this->CreateFormEnd (),
-		'runcron' => $this->CreateInputSubmit ($id, 'sendnow', $this->Lang ('run_cron'),
-			'title = "'.$this->Lang ('run_tip').'" onclick="return confirm(\''.$conf.'\');"'),
-		'forcecron' => $this->CreateInputSubmit ($id, 'forcenow', $this->Lang ('force_cron'),
-			'title = "'.$this->Lang ('force_tip').'" onclick="return confirm(\''.$conf.'\');"')
+		'startform' => $this->CreateFormStart($id, 'defaultadmin', $returnid),
+		'endform' => $this->CreateFormEnd(),
+		'runcron' => $this->CreateInputSubmit($id, 'sendnow', $this->Lang('run_cron'),
+			'title = "'.$this->Lang('run_tip').'" onclick="return confirm(\''.$conf.'\');"'),
+		'forcecron' => $this->CreateInputSubmit($id, 'forcenow', $this->Lang('force_cron'),
+			'title = "'.$this->Lang('force_tip').'" onclick="return confirm(\''.$conf.'\');"')
 	);
 }
 
-echo cron_utils::ProcessTemplate ($this, 'adminpanel.tpl', $tplvars);
-
-?>
+echo cron_utils::ProcessTemplate($this, 'adminpanel.tpl', $tplvars);

@@ -5,8 +5,7 @@
 # Refer to licence and other details at the top of file Cron.module.php
 # More info at http://dev.cmsmadesimple.org/projects/cron
 #----------------------------------------------------------------------
-if (cron_utils::isme () && 1) //TODO suitable protection against invaders
-{
+if (cron_utils::isme() && 1) { //TODO suitable protection against invaders
 /*	if (isset ($params['sendmode']))
 	{
 		switch ($params['sendmode'])
@@ -18,17 +17,16 @@ if (cron_utils::isme () && 1) //TODO suitable protection against invaders
 	}
 	else
 */
-	cron_utils::sendEvents ($this);
+	cron_utils::sendEvents($this);
 }
 
 //clear all page content echoed before now
 $handlers = ob_list_handlers();
-if($handlers)
-{
+if ($handlers) {
 	$l = count($handlers);
-	for ($c = 0; $c < $l; $c++)
+	for ($c = 0; $c < $l; $c++) {
 		ob_end_clean();
+	}
 }
 
 exit;
-?>

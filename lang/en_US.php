@@ -49,12 +49,12 @@ $lang['period_week'] = 'a week';
 $lang['period_month'] = 'a month';
 $lang['period_year'] = 'a year';
 
-$lang['event_15min_desc'] = sprintf($lang['send_frequency'],$lang['period_qtrhr']);
-$lang['event_Hourly_desc'] = sprintf($lang['send_frequency'],$lang['period_hour']); 
-$lang['event_Daily_desc'] = sprintf($lang['send_frequency'],$lang['period_day']);
-$lang['event_Weekly_desc'] = sprintf($lang['send_frequency'],$lang['period_week']);
-$lang['event_Monthly_desc'] = sprintf($lang['send_frequency'],$lang['period_month']);
-$lang['event_Yearly_desc'] = sprintf($lang['send_frequency'],$lang['period_year']);
+$lang['event_15min_desc'] = sprintf($lang['send_frequency'], $lang['period_qtrhr']);
+$lang['event_Hourly_desc'] = sprintf($lang['send_frequency'], $lang['period_hour']);
+$lang['event_Daily_desc'] = sprintf($lang['send_frequency'], $lang['period_day']);
+$lang['event_Weekly_desc'] = sprintf($lang['send_frequency'], $lang['period_week']);
+$lang['event_Monthly_desc'] = sprintf($lang['send_frequency'], $lang['period_month']);
+$lang['event_Yearly_desc'] = sprintf($lang['send_frequency'], $lang['period_year']);
 
 $lang['help_module'] = <<<EOS
 <h3>What Does It Do?</h3>
@@ -79,7 +79,7 @@ and
 <h4>Arrange for other module(s) to receive events from this module</h4>
 <p>The <a href="http://docs.cmsmadesimple.org/quick-guide/using-cmsms-events" target="_new">CMSMS documentation</a> provides an overview.
 In brief, include in each such module some installation code like:</p>
-<code>\$this-&gt;AddEventHandler('Cron', 'eventname', false);</code><br /><br />
+<code>\$this-&gt;AddEventHandler('Cron', 'eventname', FALSE);</code><br /><br />
 <p>The supported eventnames are</p>
 <ul>
 <li>'Cron15min'</li>
@@ -93,7 +93,7 @@ In brief, include in each such module some installation code like:</p>
 <p>and include in the module-class some methods:</p>
 <code>public function HandlesEvents()<br />
 {<br />
-&nbsp;return true;<br />
+&nbsp;return TRUE;<br />
 }<br />
 <br />
 public function DoEvent(\$originator, \$eventname, &amp;\$params)<br />
@@ -111,5 +111,3 @@ public function DoEvent(\$originator, \$eventname, &amp;\$params)<br />
 <p>Copyright &copy; 2010-2016 Jean-Christophe Cuvelier &lt;cybertotophe@gmail.com&gt;. All rights reserved.</p>
 <p>This module has been released under the <a href="http://www.gnu.org/licenses/licenses.html#AGPL">GNU Affero General Public License</a> version 3. The module may not be used otherwise than in accordance with the terms of that license.</p>
 EOS;
-
-?>
