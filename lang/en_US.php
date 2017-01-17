@@ -6,6 +6,7 @@
 # More info at http://dev.cmsmadesimple.org/projects/cron
 #----------------------------------------------------------------------
 
+//$lang['accessdenied'] = 'Access denied. You don\'t have %s permission.';
 $lang['accessdenied'] = 'Access denied. Please check your permissions.';
 $lang['admindescription'] = 'This module provides a convenient way for other modules to get periodic notifications, of several kinds.';
 $lang['areyousure'] = 'Are you sure ?';
