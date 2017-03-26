@@ -114,6 +114,7 @@ class Cron extends CMSModule
 		//construct frontend-url (so no admin login is needed)
 		//cmsms 1.10+ also has ->create_url();
 		//deprecated pretty-url
+		$id = 'cntnt01'; //TODO
 		$returnid = cmsms()->GetContentOperations()->GetDefaultContent();
 		$oldurl = $this->CreateLink($id, 'default', $returnid, '', array(), '', TRUE, FALSE, '', FALSE, 'cron/run');
 		$url = $this->CreateLink('_', 'default', 1, '', array(), '', TRUE);
