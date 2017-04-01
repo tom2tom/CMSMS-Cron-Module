@@ -21,6 +21,8 @@
 class Cron extends CMSModule
 {
 	public $before20;
+	public $oldtemplates;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -31,6 +33,7 @@ class Cron extends CMSModule
 			require_once $fn;
 		}
 		$this->before20 = (version_compare($CMS_VERSION, '2.0') < 0);
+		$this->oldtemplates = $this->before20 || 1; //TODO
 	}
 
 	public function GetAdminDescription()
@@ -63,7 +66,7 @@ class Cron extends CMSModule
 	}
 	public function GetVersion()
 	{
-		return '0.2';
+		return '0.3';
 	}
 	public function HasAdmin()
 	{
