@@ -1,9 +1,9 @@
 <?php
 #-----------------------------------------------------------------------
-# CMS Made Simple module: Cron (C) 2010-2016 Jean-Christophe Cuvelier
+# CMS Made Simple module: Cron (C) 2010-2017 Jean-Christophe Cuvelier
 # Allows other modules to get periodic notifications
 #-----------------------------------------------------------------------
-# CMS Made Simple (C) 2004-2016 Ted Kulp (wishy@cmsmadesimple.org)
+# CMS Made Simple (C) 2004-2017 Ted Kulp (wishy@cmsmadesimple.org)
 # Its homepage is: http://www.cmsmadesimple.org
 #-----------------------------------------------------------------------
 # This module is free software; you can redistribute it and/or modify it
@@ -66,7 +66,7 @@ class Cron extends CMSModule
 	}
 	public function GetVersion()
 	{
-		return '0.3';
+		return '0.2.1';
 	}
 	public function HasAdmin()
 	{

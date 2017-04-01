@@ -28,4 +28,9 @@
  <li>Bugfixes</li>
  </ul>
 </li>
+<li>Version 0.2.1 - 31 March 2017
+ <ul>
+ <li>CMSMS2+ fixes</li>
+ </ul>
+</li>
 </ul>
