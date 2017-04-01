@@ -42,7 +42,7 @@ $tplvars = array(
 
 if ($psend) {
 	$conf = $this->Lang('areyousure');
-	$tplvars = $tplvars + array(
+	$tplvars += array(
 		'startform' => $this->CreateFormStart($id, 'defaultadmin', $returnid),
 		'endform' => $this->CreateFormEnd(),
 		'runcron' => $this->CreateInputSubmit($id, 'sendnow', $this->Lang('run_cron'),
