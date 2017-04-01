@@ -45,9 +45,13 @@ final class cron_utils
 
 	public static function ProcessTemplate(&$mod, $tplname, $tplvars, $cache=TRUE)
 	{
-		global $smarty;
 		if ($mod->before20) {
-			$smarty->assign($tplvars);
+			global $smarty;
+		} else {
+			$smarty = $mod->GetActionTemplateObject();
+		}
+		$smarty->assign($tplvars);
+		if ($mod->oldtemplates) {
 			return $mod->ProcessTemplate($tplname);
 		} else {
 			if ($cache) {
