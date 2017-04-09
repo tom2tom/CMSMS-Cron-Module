@@ -109,7 +109,7 @@ class Cron extends CMSModule
 
 	public function GetChangeLog()
 	{
-		return ''.@file_get_contents(cms_join_path(dirname(__FILE__), 'changelog.inc'));
+		return ''.@file_get_contents(cms_join_path(dirname(__FILE__), 'lib', 'doc', 'changelog.htm'));
 	}
 
 	public function GetHelp()
