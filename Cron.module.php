@@ -121,9 +121,9 @@ class Cron extends CMSModule
 		$returnid = cmsms()->GetContentOperations()->GetDefaultContent();
 		$oldurl = $this->CreateLink($id, 'default', $returnid, '', array(), '', TRUE, FALSE, '', FALSE, 'cron/run');
 		$url = $this->CreateLink('_', 'default', 1, '', array(), '', TRUE);
-		//strip the fake returnid, so that the default will be used
+		//strip the fake returnid, so that the default will be assumed
 		$sep = strpos($url, '&amp;');
-		$newurl = substr($url, 0, $sep);
+		$newurl = substr($url, 0, $sep) . '&showtemplate=false';
 		return $this->Lang('help_module', $newurl, $oldurl);
 	}
 
